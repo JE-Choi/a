@@ -1,9 +1,12 @@
 spring:
-    datasource:
-        driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:5432/postgres # url
-        username: je # username
-        password:  # password
-        hikari:
-            auto-commit: true
-            maximum-pool-size: 50
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres # url
+    username: je # username
+    password:  # password
+    hikari:
+      auto-commit: true
+      maximum-pool-size: 50
+  # OAUTH
+  profiles:
+    include: oauth
