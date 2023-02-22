@@ -16,11 +16,12 @@ public class Scheduler {
     @SchedulerLock(name = "taskName")
     public void task() throws InterruptedException {
         //
-        log.info("start task...");
-        for (int i = 0; i < 10; i++) {
-            log.info(i + "");
-            Thread.sleep(1000);
-        }
-        log.info("end task...");
+        // 스케줄러 출력문
+//        log.info("start task...");
+//        for (int i = 0; i < 10; i++) {
+//            log.info(i + "");
+//            Thread.sleep(1000);
+//        }
+//        log.info("end task...");
     }
 }
