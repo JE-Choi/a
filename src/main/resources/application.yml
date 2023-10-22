@@ -10,3 +10,5 @@ spring:
   # OAUTH
   profiles:
     include: oauth
+server:
+  port: 8090
