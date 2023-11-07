@@ -11,8 +11,12 @@ permissions:
 
 jobs:
   print:
-    name: print
-    uses: ./.github/workflows/env.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 코드
+        uses: actions/checkout@v2
+      - name: 파일 사용
+        uses: ./.github/workflows/env.yml
   job1:
     runs-on: ubuntu-latest
     steps:
