@@ -10,6 +10,9 @@ permissions:
   contents: read
 
 jobs:
+  print:
+    name: print
+    uses: ./.github/workflows/env.yml
   job1:
     runs-on: ubuntu-latest
     steps:
@@ -41,8 +44,3 @@ jobs:
     steps:
     - name: job5
       run: echo failure
-  job6:
-    if: ${{always()}}
-    uses: ./.github/workflows/env.yml
-    with:
-      username: jechoi
