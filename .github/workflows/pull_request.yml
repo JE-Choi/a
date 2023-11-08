@@ -26,7 +26,6 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: Print a greeting
         if: |
-          (${{github.event_name  == 'workflow_dispatch'}}) ||
           (${{github.event_name == 'pull_request' && github.event.pull_request.merged  == true && github.base_ref  == 'main' && github.head_ref == 'release'}})
         run: echo success
       - name: name
