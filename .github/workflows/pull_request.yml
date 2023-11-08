@@ -20,6 +20,10 @@ jobs:
     name: My Job
     runs-on: ubuntu-latest
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Print a greeting
         if: |
           (${{github.event_name}} == 'workflow_dispatch') ||
