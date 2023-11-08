@@ -1,0 +1,28 @@
+name: pr 머지되면 실행
+
+run-name: pr 머지되면 실행 | ${{ github.event.pull_request.title || github.event_name }}
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'main'
+
+jobs:
+  check:
+    runs-on: ubuntu-lastest
+    name: 머지할지 체크
+    steps:
+    - if: |
+        (${{github.event_name}} == 'workflow_dispatch') ||
+        (${{github.event_name}} == 'pull_request' && ${{github.event.pull_request.merged}} == true && ${{github.base_ref}} == 'main')
+    - if: failure()
+      run: exit 1
+
+  execute:
+    runs-on: ubuntu-lastest
+    name: PR 생성
+    needs: [check]
+    steps:
+      - run: echo success
