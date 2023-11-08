@@ -16,10 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print a greeting
-        env:
-          MY_VAR: Hi there! My name is
-          FIRST_NAME: Mona
-          MIDDLE_NAME: The
-          LAST_NAME: Octocat
-        run: |
-          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME. ${{github.event.inputs.username}}
+        if: |
+          (${{github.event_name}} == 'workflow_dispatch') ||
+          (${{github.event_name}} == 'pull_request' && ${{github.event.pull_request.merged}} == true && ${{github.base_ref}} == 'main')
+        run: echo success
