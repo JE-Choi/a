@@ -9,24 +9,14 @@ on:
     branches:
       - 'main'
   workflow_dispatch:
-
-permissions:
-  contents: write
-  pull-requests: write
-  actions: read
   
 jobs:
-  my-job:
-    name: My Job
+  job1:
+    if: github.event.pull_request.merged == true && github.base_ref == 'main' # The job will only run if the PR is merged and the base branch is 'main'
     runs-on: ubuntu-latest
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Print a greeting
-        if: ${{github.event_name == 'pull_request' && github.event.pull_request.merged  == true && github.base_ref  == 'main' && github.head_ref == 'release'}}
-        run: echo ${{github.event_name == 'pull_request' && github.event.pull_request.merged  == true && github.base_ref  == 'main' && github.head_ref == 'release'}}
-      - if: ${{github.event_name == 'pull_request' && github.event.pull_request.merged  == true && github.base_ref  == 'main'}
-        run: exit 1
+      - name: Checkout
+        uses: actions/checkout@v2
 
+      - name: Run a script
+        run: echo "PR has been merged into the main branch."
