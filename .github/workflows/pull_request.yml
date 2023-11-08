@@ -12,7 +12,9 @@ on:
   
 jobs:
   job1:
-    if: github.event.pull_request.merged == true && github.base_ref == 'main'
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      (github.event.pull_request.merged == true && github.base_ref == 'main'  && github.head_ref == 'release')
     runs-on: ubuntu-latest
     steps:
       - name: Run a script
