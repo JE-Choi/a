@@ -10,8 +10,12 @@ on:
       - 'main'
 
 jobs:
-  check:
+  job-name:
     runs-on: ubuntu-lastest
-    name: 머지할지 체크
-    steps:
-    - run: echo success
+    steps: 
+      - id: step-id
+        run: echo "test"
+      - if: always() // 성공여부 상관없이 항상 실행
+        run: echo ${{ steps.step-id.outcome }} // 성공여부 출력
+      - if: failure()
+        run: echo "실패했을 때, 실행함"
