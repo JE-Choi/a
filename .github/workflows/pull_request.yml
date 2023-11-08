@@ -31,11 +31,11 @@ jobs:
         run: echo success
       - name: name
         run: |
-          echo ${{github.event_name}} == 'pull_request'
-          echo ${{github.event.pull_request.merged}} == true
-          echo ${{github.base_ref}} == 'main'
+          echo ${{github.event_name == 'pull_request'}} 
+          echo ${{github.event.pull_request.merged == true}}
+          echo ${{github.base_ref == 'main'}}
           echo ${{github.head_ref}} 
-          echo ${{github.head_ref}} == 'release'
+          echo ${{github.head_ref== 'release'}} 
       - if: failure()
         run: exit 1
 
