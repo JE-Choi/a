@@ -15,8 +15,12 @@ jobs:
     if: github.event.pull_request.merged == true && github.base_ref == 'main' # The job will only run if the PR is merged and the base branch is 'main'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - name: Run a script
         run: echo "PR has been merged into the main branch."
+  job2:
+    if: github.event.pull_request.merged == true && github.base_ref == 'main' && github.head_ref == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a script
+        run: echo "github.head_ref"
+  
