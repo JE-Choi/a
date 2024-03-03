@@ -1,4 +1,4 @@
-name: job output
+name: job output값 정의하여 다른 job과 데이터 공유하기
 
 on:
   workflow_dispatch:
@@ -8,13 +8,14 @@ env:
 
 jobs:
   job1:
-    name: 메세지를 출력하고, 반환한다.
+    name: step에서 output값 정의하고, 반환한다. 그리고 step에서 정의한 output값을 출력한다.
     runs-on: ubuntu-latest
     outputs:
       version: ${{steps.prepare-variables.outputs.version}}
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      
     - name: Prepare variables
       id: prepare-variables
       run: |
@@ -25,12 +26,14 @@ jobs:
     - name: print variables
       run: |
         echo ${{steps.prepare-variables.outputs.version}}
+        
   job2:
+    name: job2에서 job1의 outputs값을 출력한다.
     runs-on: ubuntu-latest
     needs: job1
     steps:
       - uses: actions/checkout@v3
-      - name: print variables
+      - name: needs.job1.outputs.version과 env 변수값을 출력한다. 
         run: | 
           echo ${{needs.job1.outputs.version}}
           echo ${{env.PROJECT}}
