@@ -1,0 +1,25 @@
+name: multi job
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: print
+      run: |
+        echo "출력 job1"
+        
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: print
+      run: |
+        echo "출력 job2"
