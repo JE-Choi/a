@@ -11,7 +11,7 @@ jobs:
     name: 메세지를 출력하고, 반환한다.
     runs-on: ubuntu-latest
     outputs:
-      version: ${{steps.prepare-variables.output.version}}
+      version: ${{steps.prepare-variables.outputs.version}}
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -24,7 +24,7 @@ jobs:
         echo "version=$VERSION" >> $GITHUB_OUTPUT
     - name: print variables
       run: |
-        echo ${{steps.prepare-variables.output.version}}
+        echo ${{steps.prepare-variables.outputs.version}}
   job2:
     runs-on: ubuntu-latest
     needs: job1
